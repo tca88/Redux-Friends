@@ -7,7 +7,8 @@ const FriendsList = props => {
   return (
     <div>
       {props.friends.map(friend => {
-        return <Friend key={friend.name} friend={friend} />;
+        console.log("hi friend", friend);
+        return <Friend key={friend.id} friend={friend} />;
       })}
     </div>
   );

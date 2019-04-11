@@ -30,3 +30,23 @@ export const getFriends = () => dispatch => {
       dispatch({ type: FETCH_DATA_FAILURE, payload: err.response });
     });
 };
+
+export const ADD_DATA_START = "ADD_DATA_START";
+export const ADD_DATA_SUCCESS = "ADD_DATA_SUCCESS";
+export const ADD_DATA_FAILURE = "ADD_DATA_FAILURE";
+export const addFriend = newFriend => dispatch => {
+  console.log("newnew", newFriend);
+  dispatch({ type: ADD_DATA_START });
+  axiosAuth()
+    .post("http://localhost:5000/api/friends", newFriend)
+    .then(res => {
+      console.log("look", res);
+      return dispatch({
+        type: ADD_DATA_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_DATA_FAILURE, payload: err.response });
+    });
+};

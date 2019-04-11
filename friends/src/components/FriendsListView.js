@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import FriendsList from "./FriendsList";
-import { getFriends, login } from "../actions";
+import { getFriends, login, addFriend } from "../actions";
+import AddFriendForm from "./AddFriendForm";
 
 class FriendsListView extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class FriendsListView extends Component {
       <div>
         <button onClick={this.logout}>Logout</button>
         <FriendsList friends={this.props.friends} />
+        <AddFriendForm friends={this.props.friends} />
       </div>
     );
   }
@@ -32,7 +34,8 @@ const mapStateToProps = state => {
   return {
     friends: state.friendsReducer.friends,
     error: state.friendsReducer.error,
-    isFetching: state.friendsReducer.isFetching
+    isFetching: state.friendsReducer.isFetching,
+    friend: state.friendsReducer.friend
   };
 };
 
@@ -40,6 +43,7 @@ export default connect(
   mapStateToProps,
   {
     getFriends,
-    login
+    login,
+    addFriend
   }
 )(FriendsListView);
