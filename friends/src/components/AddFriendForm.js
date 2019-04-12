@@ -8,16 +8,16 @@ class AddFriendForm extends Component {
     this.state = {
       friends: this.props.friends,
       name: "",
-      age: 40,
-      id: Date.now(),
-      email: "test@gmail.com"
+      age: 0,
+      id: "",
+      email: ""
     };
   }
   handleChange = e => {
     e.preventDefault();
     this.setState({
       age: this.state.age,
-      id: this.state.id,
+      id: Date.now(),
       email: this.state.email,
       [e.target.name]: e.target.value
     });
@@ -26,11 +26,17 @@ class AddFriendForm extends Component {
   addFriend = e => {
     e.preventDefault();
 
-    return this.props.addFriend({
+    this.props.addFriend({
       age: this.state.age,
       id: this.state.friends.length,
       email: this.state.email,
       name: this.state.name
+    });
+
+    this.setState({
+      age: 0,
+      email: "",
+      name: ""
     });
   };
 
@@ -45,6 +51,20 @@ class AddFriendForm extends Component {
               placeholder="Add a new buddy"
               onChange={this.handleChange}
               value={this.state.name}
+            />
+            <input
+              type="text"
+              name="email"
+              placeholder="email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+            <input
+              type="number"
+              name="age"
+              placeholder="Age"
+              onChange={this.handleChange}
+              value={this.state.age}
             />
           </div>
           <button className="submit" type="submit">
